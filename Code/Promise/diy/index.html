@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="Promise.js"></script>
+</head>
+<body>
+<script>
+    // let promise = new Promise(
+    //     (resolve, reject) => {
+    //         // setTimeout(() => {resolve('success');}, 1000);
+    //         // setTimeout(() => {reject('failed');}, 1000);
+    //         // resolve('success');
+    //         reject('failed');
+    //     }
+    // )
+    //
+    // const res = promise
+    //     // .then()
+    //     .then(
+    //         value => {
+    //             console.log(`then1: ${value}`);
+    //             return value;
+    //             // return new Promise((resolve, reject) => {reject(value + ' then1 失败');})
+    //             // throw 'Error';
+    //         },
+    //         reason => {
+    //             console.warn(`then1: ${reason}`);
+    //             return reason;
+    //             // return new Promise((resolve, reject) => {reject(reason + ' then1 失败');})
+    //             // throw 'Error';
+    //         }
+    //     )
+    //     .then(
+    //         value => {
+    //             console.log(`then2: ${value}`);
+    //         },
+    //         reason => {
+    //             console.warn(reason);
+    //         }
+    //     )
+    //     .catch(
+    //         reason => {
+    //             console.warn(reason);
+    //         }
+    //     );
+    let res0 = Promise.resolve(new Promise(
+        (resolve, reject) => {
+            setTimeout(() => {
+                resolve('success res0');
+            }, 1000);
+        }
+    ));
+    let res1 = Promise.resolve('success res1').then();
+    let res2 = Promise.resolve(new Promise(
+        (resolve, reject) => {
+            resolve('success res2');
+        }
+    ));
+    let res3 = Promise.resolve('success res3');
+
+    let res = Promise.race([res0,res1,res2,res3])
+    console.log(res);
+</script>
+</body>
+</html>

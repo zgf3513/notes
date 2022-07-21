@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.UserMapper">
+    <select id="getById" resultType="user" parameterType="int">
+        select * from MybatisTest.user where id = #{id}
+    </select>
+
+    <select id="getUserByLimit" resultType="user" parameterType="map">
+        select * from MybatisTest.user limit #{startIndex},#{pageSize}
+    </select>
+
+    <select id="getUserRowBounds" resultType="user" parameterType="map">
+        select * from MybatisTest.user
+    </select>
+</mapper>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" id="btn" value="GET">
+<script>
+    const url = '';
+    const btn = document.querySelector('#btn');
+
+    btn.addEventListener('click', function () {
+        const p = new Promise((resolve, reject) => {
+            // 创建一个ajax对象
+            const xhr = new XMLHttpRequest();
+            // 设置请求方式和请求地址
+            xhr.open('GET', url);
+            // 发送
+            xhr.send();
+            // 设置回调函数
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300) {
+                    resolve(xhr.response);
+                } else {
+                    reject(`请求失败 ${xhr.status}`);
+                }
+            };
+        });
+        p.then(
+            (data) => {
+                alert(data);
+            },
+            (err) => {
+                alert(err);
+            }
+        );
+    });
+</script>
+</body>
+</html>

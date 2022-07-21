@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script>
+    // 编写一个js对象
+    let user = {
+        name:"张三",
+        age:"18",
+        sex:"男"
+    };
+    // 将js对象转换为json对象
+    let userJson = JSON.stringify(user);
+    console.log(userJson);
+    // 将json对象转换为js对象
+    let userJS = JSON.parse(userJson);
+    console.log(userJS)
+  </script>
+</head>
+<body>
+
+</body>
+</html>

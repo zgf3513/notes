@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<button id="btn-get">GET</button>
+<button id="btn-post">POST</button>
+
+<script>
+    $('#btn-get').click(function () {
+        $.get('http://localhost:3000/api/get/10086', function (data) {
+            console.log(data);
+        });
+    });
+    $('#btn-post').click(function () {
+        $.post('http://localhost:3000/api/add/10086', function (data) {
+            console.log(data);
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.BlogMapper">
+    <insert id="add">
+        insert into mybatistest.blog(id, title, author, create_time, views)
+        values (#{id},#{title},#{author},#{createTime},#{views});
+    </insert>
+
+
+    <select id="getAll" resultType="blog">
+        select * from mybatistest.blog
+    </select>
+
+
+    <select id="getIF" parameterType="map" resultType="blog">
+        select * from mybatistest.blog
+        <where>
+            <include refid="if-title-author" />
+        </where>
+    </select>
+
+    <sql id="if-title-author">
+        <if test="title != null">
+            title = #{title}
+        </if>
+        <if test="author != null">
+            and author = #{author}
+        </if>
+    </sql>
+
+    <select id="getChoose" parameterType="map" resultType="blog">
+        select * from mybatistest.blog
+        <where>
+            <choose>
+                <when test="title!=null">
+                    title = #{title}
+                </when>
+                <when test="author != null">
+                    and author = #{author}
+                </when>
+                <otherwise>
+                    and views = #{views}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <select id="getForEach" parameterType="map" resultType="blog">
+        select * from mybatistest.blog
+        <where>
+            <foreach item="id" collection="ids"
+                     open="and (" separator="or" close=")">
+                id=#{id}
+            </foreach>
+        </where>
+    </select>
+
+    <update id="update" parameterType="map">
+        update mybatistest.blog
+            <set>
+                <if test="title != null">title = #{title},</if>
+                <if test="views != null">views = #{views}</if>
+            </set>
+        where id=#{id}
+    </update>
+
+</mapper>

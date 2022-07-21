@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="抽奖" id="btn">
+
+<script>
+    function random(m,n){
+        return Math.floor(Math.random()*(n-m+1)+m-1);
+    }
+
+    const btn = document.querySelector('#btn');
+
+    btn.addEventListener('click',function(){
+
+        /*setTimeout(()=>{
+            let num = random(1,10);
+            if(num === 1){
+                alert('恭喜你中奖了');
+            }else{
+                alert('很遗憾，没有中奖');
+            }
+        },1000);*/
+
+        // promise 形式实现
+        // resolve（解决） 和 reject（拒绝） 都是函数类型的数据，只能调用一次
+        const promise = new Promise((resolve, reject) => {
+            setTimeout(()=>{
+                let num = random(1,10);
+                if(num === 1){
+                    resolve(num);  // 将resolve的状态设置为成功
+                }else{
+                    reject(num); // 将resolve的状态设置为失败
+                }
+            },1000);
+        });
+        // 调用then方法，传入两个函数，一个是resolve，一个是reject
+        promise.then(
+            (data)=>{alert(`恭喜你中奖了，奖号为：${data}`);},
+            (data) => {alert(`很遗憾，没有中奖，奖号为：${data}`);}
+        ).catch(function(err){
+            alert(err);
+        });
+    });
+</script>
+</body>
+</html>

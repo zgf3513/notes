@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<input type="button" id="get-btn" value="GET">
+<input type="button" id="post-btn" value="POST">
+<input type="button" id="put-btn" value="PUT">
+<input type="button" id="delete-btn" value="DELETE">
+
+<script>
+    axios.defaults.baseURL = 'http://localhost:3000/'; // 设置默认的baseURL
+    axios.defaults.timeout = 5000; // 设置默认的超时时间
+    let get_btn = document.getElementById('get-btn');
+    get_btn.addEventListener('click', function () {
+        axios.get('/posts')
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
+    let post_btn = document.getElementById('post-btn');
+    post_btn.addEventListener('click', function () {
+        axios.post('/posts', {
+            title: 'test title',
+            author: '张三'
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
+    let put_btn = document.getElementById('put-btn');
+    put_btn.addEventListener('click', function () {
+        axios.put('/posts/2', {
+            author: '李四'
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
+    let delete_btn = document.getElementById('delete-btn');
+    delete_btn.addEventListener('click', function () {
+        axios.delete('/posts/2')
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
+</script>
+</body>
+</html>

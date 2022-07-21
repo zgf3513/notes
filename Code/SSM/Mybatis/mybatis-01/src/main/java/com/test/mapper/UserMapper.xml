@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.UserMapper">
+    <select id="getUserLike" resultType="com.test.entity.User">
+        select * from user where name like "%"#{value}"%"
+    </select>
+
+    <select id="getAll" resultType="com.test.entity.User" >
+        select * from MybatisTest.user
+    </select>
+
+    <select id="getById" resultType="com.test.entity.User" parameterType="int">
+        select * from MybatisTest.user where id = #{id}
+    </select>
+
+    <insert id="add" parameterType="com.test.entity.User">
+        insert into MybatisTest.user values (null ,#{name},#{pass})
+    </insert>
+
+    <insert id="add2" parameterType="map">
+        insert into MybatisTest.user values (#{uid} ,#{uname},#{password})
+    </insert>
+
+    <update id="update" parameterType="com.test.entity.User">
+        update MybatisTest.user set pass=#{pass} where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from user where id=#{id}
+    </delete>
+</mapper>

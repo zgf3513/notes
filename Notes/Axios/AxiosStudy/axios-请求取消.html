@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<input type="button" id="send-btn" value="发送请求">
+<input type="button" id="cancel-btn" value="取消请求">
+<script>
+    axios.defaults.baseURL = 'http://localhost:3000/'; // 设置默认的baseURL
+    // 点击send-btn发送get请求，如果上一个请求还未响应完成，则取消上一个请求，点击cancel-btn取消请求
+    let send_btn = document.getElementById('send-btn');
+    let cancel_btn = document.getElementById('cancel-btn');
+    let cancel_source = null;
+    send_btn.addEventListener('click', function () {
+        if (cancel_source != null) {
+            cancel_source('取消请求');
+        }
+        console.log('请求发送中...');
+        axios.get('/posts', {
+            cancelToken: new axios.CancelToken(cancel => {cancel_source = cancel;})
+        })
+            .then(function (response) {
+                console.log('请求完成');
+                console.log(response);
+                cancel_source = null;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
+    cancel_btn.addEventListener('click', function () {
+        cancel_source('已取消请求');
+    });
+</script>
+</body>
+</html>

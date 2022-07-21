@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.TeacherMapper">
+<!--    <select id="getTeacherAndStu" resultMap="teacher">-->
+<!--        select t.id tid,t.name tname,s.id sid,s.name sname-->
+<!--        from mybatistest.teacher t,mybatistest.student s-->
+<!--        where t.id=s.tid and tid=#{id}-->
+<!--    </select>-->
+<!--    <resultMap id="teacher" type="teacher">-->
+<!--        <result property="id" column="tid"/>-->
+<!--        <result property="name" column="tname"/>-->
+<!--        <collection property="students" ofType="student">-->
+<!--            <result property="id" column="sid"/>-->
+<!--            <result property="name" column="sname"/>-->
+<!--            <result property="tid" column="tid"/>-->
+<!--        </collection>-->
+<!--    </resultMap>-->
+
+    <select id="getTeacherAndStu2" resultMap="teacher">
+        select * from mybatistest.teacher where id=#{tid}
+    </select>
+    <resultMap id="teacher" type="teacher">
+        <collection property="students" javaType="ArrayList" ofType="student" select="getStudents" column="id"/>
+    </resultMap>
+    <select id="getStudents" resultType="student">
+        select * from mybatistest.student where tid=#{tid}
+    </select>
+
+</mapper>

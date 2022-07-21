@@ -1,0 +1,9 @@
+**/.idea
+**/.vscode
+**/node_modules
+**/target
+**/vendor
+**/venv
+**/__pycache__
+**/*.7z
+**/*不上传

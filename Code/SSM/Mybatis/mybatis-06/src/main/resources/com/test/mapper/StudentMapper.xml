@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.StudentMapper">
+    <resultMap id="student" type="student">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <association property="teacher" column="tid" javaType="teacher" select="getTeacher"/>
+    </resultMap>
+    <select id="getAllStuAndTeacher" resultMap="student">
+        select * from mybatistest.student;
+    </select>
+    <select id="getTeacher" resultType="teacher">
+        select * from mybatistest.teacher where id=#{id}
+    </select>
+
+    <select id="getAllStuAndTeacher2" resultMap="student2">
+        select s.id sid,s.name sname,t.id tid,t.name tname
+        from mybatistest.student s,mybatistest.teacher t
+        where s.tid = t.id
+    </select>
+    <resultMap id="student2" type="student">
+        <result property="id" column="sid"/>
+        <result property="name" column="sname"/>
+        <association property="teacher" javaType="teacher">
+            <result property="id" column="tid"/>
+            <result property="name" column="tname"/>
+        </association>
+    </resultMap>
+</mapper>

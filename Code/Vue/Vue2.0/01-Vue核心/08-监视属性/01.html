@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<div id="demo">
+    <h2>numa:{{num.a}}</h2>
+    <h2>numb:{{num.b}}</h2>
+    <input @click="num.a++" type="button" value="更换A">
+    <input @click="num.b++" type="button" value="更换B">
+</div>
+<script>
+    const vm = new Vue({
+        el: '#demo',
+        data: {
+            num: {
+                a: 1,
+                b: 1
+            }
+        },
+        methods: {
+        },
+        watch: {
+            num: {
+                handler(val) {
+                    console.log(val);
+                },
+                deep: true // 对象的属性的值也监听
+            }
+        }
+    })
+</script>
+</body>
+</html>

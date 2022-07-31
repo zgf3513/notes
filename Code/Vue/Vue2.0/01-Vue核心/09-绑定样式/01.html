@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../resource/js/vue.js"></script>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: lightgray;
+            margin: 10px;
+        }
+
+        .box.red{
+            background: red;
+        }
+
+        .box.blue{
+            background: blue;
+        }
+
+        .box.green{
+            background: green;
+        }
+
+        .box.yellow{
+            background: yellow;
+        }
+
+
+        .box.round{
+            border-radius: 25%;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="demo">
+    <div class="box" :class="bgColor" @click="changeBgColor">{{name}}</div>
+    <div :class="arr">{{name}}</div>
+    <div :class="obj">{{name}}</div>
+    <div class="box" :style="styleObj">{{name}}</div>
+    <div class="box" :style="styleArr">{{name}}</div>
+</div>
+<script>
+    const vm = new Vue({
+        el: '#demo',
+        data: {
+            name: '张三',
+            bgColor: 'red',
+            arr: ['box', 'yellow', 'round'],
+            obj: {
+                box: true,
+                yellow: false,
+                round: true
+            },
+            styleObj: {
+                 color: 'red',
+                margin: '10px'
+            },
+            styleArr: [
+                {margin: '10px'},
+                {color: 'red'}
+            ]
+        },
+        methods: {
+            changeBgColor() {
+                this.bgColor = this.bgColor === 'red' ? 'blue' : 'red';
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="demo"></div>
+<script>
+  // 创建一个student组件
+
+  // 创建一个school组件
+  const school = {
+    template: `<div>
+      <h2>schoolName:{{name}}</h2>
+      <h2>address:{{address}}</h2>
+      <button @click="showSchoolName">show school name</button>
+    </div>`,
+    name: 'School',
+    data(){
+      return {
+        name: '垮了，没有',
+        address: '成都',
+      }
+    },
+    methods: {
+      showSchoolName(){
+        alert(this.name)
+      }
+    }
+  }
+
+
+
+  new Vue({
+    template: `<school></school>`,
+    el:'#demo',
+    // 2.注册组件
+    components: {
+      school,
+    }
+  });
+
+  function Demo(){
+    this.a = 1
+    this.b = 2
+  }
+  const d = new Demo();
+
+  console.log(Demo.prototype) // 显示原型属性
+  console.log(d.__proto__) // 隐式原型属性
+
+  console.log(Demo.prototype===d.__proto__)
+
+  Demo.prototype.x = 99 // 通过显示原型属性操作原型对象，增加一个值为99的x属性
+
+
+</script>
+<script>
+  Vue.config.productionTip = false;
+</script>
+</body>
+</html>

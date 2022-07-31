@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<div id="demo">
+  <ul>
+    <li v-for="(item,index) in list" :key="item.id"><!--key保证不重复，用index也成-->
+      {{index}}--姓名：{{item.name}}--年龄：{{item.age}}
+    </li>
+  </ul>
+  <ul>
+    <li v-for="(value,key) in obj" :key="key"><!--先value后key
+    -->
+        {{key}}--{{value}}
+    </li>
+  </ul>
+</div>
+<script>
+  const vm = new Vue({
+    el: '#demo',
+    data: {
+        list: [
+            {id: 1, name: '张三', age: 18},
+            {id: 2, name: '李四', age: 20},
+            {id: 3, name: '王五', age: 22},
+        ],
+      obj: {
+        id: 1,
+        name: '张三',
+        age: 18,
+      },
+    },
+    methods: {
+
+    }
+  })
+</script>
+</body>
+</html>

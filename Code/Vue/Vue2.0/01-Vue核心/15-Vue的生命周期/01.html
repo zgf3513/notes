@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="demo">
+  <h2 :style="{opacity}">Welcome！</h2>
+</div>
+<script>
+  new Vue({
+    el:'#demo',
+    data:{
+      opacity: 1
+    },
+    methods: {
+      changes(){
+
+      }
+    },
+    mounted(){
+      // 此时，页面中呈现的都是经过Vue编译的DOM，对DOM的操作均有效（尽可能避免），至此初始化的过程结束，一般在此精选：开启定时器，发送网络请求，订阅消息，绑定自定义时间等初始化操作
+      console.log('挂载完成')
+      setInterval(() => {
+        if (this.opacity <= 0) this.opacity = 1
+        this.opacity -= 0.01
+      }, 16)
+    }
+  });
+  // 外部定时器实现  不推荐
+  //   setInterval(() => {
+  //     if (vm.$data.opacity <= 0) vm.$data.opacity = 1
+  //     vm.$data.opacity -= 0.01
+  //   }, 16)
+</script>
+<script>
+  Vue.config.productionTip = false;
+</script>
+</body>
+</html>

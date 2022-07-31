@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="demo">
+  <h2 :style="{opacity}">张三活着</h2>
+  <button @click="opacity = 1">张三状态为1</button>
+  <button @click="kill">点我让张三自杀</button>
+  <button @click="completelyKill">让张三完全自杀</button>
+</div>
+<script>
+  new Vue({
+    el:'#demo',
+    data:{
+      opacity: 1
+    },
+    methods: {
+      kill(){
+        clearInterval(this.alive)
+      },
+      completelyKill(){
+        this.$destroy()
+      }
+    },
+    mounted(){
+      this.alive = setInterval(() => {
+        if (this.opacity <= 0) this.opacity = 1
+        this.opacity -= 0.01
+      }, 16)
+    },
+    beforeDestroy() {
+      clearInterval(this.alive)
+    }
+  });
+</script>
+<script>
+  Vue.config.productionTip = false;
+</script>
+</body>
+</html>

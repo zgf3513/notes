@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="demo">
+    <h1>你好{{name}}！</h1>
+    <h2>{{id}}</h2>
+</div>
+<script>
+    const vm = new Vue({
+        el: '#demo',
+        data(){
+            return {
+                name: '张三',
+                id: '123456789'
+            };
+        }
+    });
+    console.log(vm);
+</script>
+<script>
+    Vue.config.productionTip = false;
+</script>
+</body>
+</html>

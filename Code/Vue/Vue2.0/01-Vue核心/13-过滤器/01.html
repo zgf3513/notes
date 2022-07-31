@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../resource/js/vue.js"></script>
+    <script src="../../resource/js/dayjs.min.js"></script>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="demo">
+    <h2>显示格式化后的书简</h2>
+    <h3>现在是{{time}}</h3>
+    <!--计算属性实现-->
+    <h3>现在是{{fmtTime}}</h3>
+    <!--methods实现-->
+    <h3>现在是{{getFmtTime()}}</h3>
+    <!--过滤器实现-->
+    <h3>现在是{{time | timeFormat}}</h3>
+</div>
+<script>
+    Vue.filter('filterName',function (value){})// 全局过滤器，必须在new Vue之前
+    new Vue({
+        el: '#demo',
+        data:{
+            time: 0
+        },
+        computed: {
+            fmtTime(){
+                return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+            }
+        },
+        methods: {
+            getFmtTime(){
+                return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+            }
+        },
+        // 局部过滤器
+        filters: {
+            timeFormat(value){
+                console.log('hello filters')
+                return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
+            }
+        }
+    })
+</script>
+<script>
+    Vue.config.productionTip = false;
+</script>
+</body>
+</html>

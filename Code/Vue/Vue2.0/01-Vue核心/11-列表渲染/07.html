@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<div id="demo">
+  <button @click="addSex">添加一个性别</button>
+  <h1>{{student.id}}</h1>
+  <h1>{{student.name}}</h1>
+  <h1>{{student.age}}</h1>
+</div>
+<script>
+  const vm = new Vue({
+    el: '#demo',
+    data: {
+      student:
+        {id: 1, name: '张三', age: 18},
+    },
+    methods: {
+      addSex(){
+        this.$set(this.student,'sex','男')
+      }
+    }
+  })
+</script>
+</body>
+</html>

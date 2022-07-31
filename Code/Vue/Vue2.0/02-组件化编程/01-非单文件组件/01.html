@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="demo">
+  <school></school>
+  <hr>
+  <student></student>
+  <hello></hello>
+</div>
+<script>
+  // 1.
+
+  // 创建一个school组件
+  const school = Vue.extend({
+    // el:'#demo', 一定不要写el配置项，因为所有对组件最终都要被一个vm管理，vm决定服务于哪个容器的
+    template: `<div>
+      <h2>schoolName:{{name}}</h2>
+      <h2>address:{{address}}</h2>
+      <button @click="showSchoolName">show school name</button>
+    </div>`,
+    data(){
+      return {
+        name: '垮了，没有',
+        address: '成都',
+      }
+    },
+    methods: {
+      showSchoolName(){
+        alert(this.name)
+      }
+    }
+  })
+
+  // 创建一个student组件
+  const student = Vue.extend({
+    template: `<div>
+      <h2>studentName:{{name}}</h2>
+      <h2>age:{{age}}</h2>
+    </div>`,
+    data(){
+      return {
+        name: '张三',
+        age: 18
+      }
+    }
+  })
+
+  // 创建一个hello组件
+  const hello = Vue.extend({
+    template: `<div>
+      <h2>{{msg}}</h2>
+    </div>`,
+    data(){
+      return {
+        msg: 'hello',
+      }
+    }
+  })
+
+  Vue.component('hello',hello)
+
+  new Vue({
+    el:'#demo',
+    // 2.注册组件
+    components: {
+      school: school,
+      student: student
+    }
+  });
+</script>
+<script>
+  Vue.config.productionTip = false;
+</script>
+</body>
+</html>

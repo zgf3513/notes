@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="demo">
+  <h1>单项数据绑定</h1>
+  <label>
+    <input type="text" :value="name">
+  </label>
+  <h1>双项数据绑定</h1>
+  <label>
+    <input type="text" v-model="name">
+  </label>
+  <br>
+  <label>
+    <select>
+      <option id="select" v-for="item in list" :value="item">{{item}}</option>
+    </select>
+  </label>
+  <!--v-model只能用在表单类元素上-->
+</div>
+<script>
+  new Vue({
+    el:'#demo',
+    data:{
+      name:'张三',
+      list: ['苹果','香蕉','西瓜'],
+    }
+  });
+</script>
+<script>
+  Vue.config.productionTip = false;
+</script>
+</body>
+</html>

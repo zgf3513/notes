@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<div id="demo">
+  <h2>numa:{{num}}</h2>
+  <input @click="num++" type="button" value="更换">
+</div>
+<script>
+  const vm = new Vue({
+    el: '#demo',
+    data: {
+      num: 1
+    },
+    methods: {
+    },
+    watch: {
+      num() {
+        console.log('num changed');
+      }
+    }
+  })
+</script>
+</body>
+</html>

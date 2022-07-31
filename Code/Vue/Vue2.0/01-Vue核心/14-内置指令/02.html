@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="demo">
+  <h3>普通大小</h3>
+  <p v-text="n"></p>
+  <h3>大十倍</h3>
+  <p v-bigger="n"></p>
+  <button @click="n++">点我n++</button>
+  <input type="text" v-fbind:value="n">
+</div>
+<script>
+  new Vue({
+    el:'#demo',
+    data:{
+      n: 1
+    },
+    directives:{
+      bigger(element,binging){
+        element.innerText = binging.value * 10
+        console.log('变大，变大，变大')
+      },
+      fbind: {
+        bind(element,binging){
+          element.value = binging.value
+          console.log('绑定时')
+        },
+        inserted(element,binging){
+          element.focus()
+          console.log('插入页面时')
+        },
+        update(element,binging){
+          element.value = binging.value
+          element.focus()
+          console.log('更新时')
+        }
+      }
+    }
+  });
+</script>
+<script>
+  Vue.config.productionTip = false;
+</script>
+</body>
+</html>

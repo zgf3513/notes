@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<div id="demo">
+  <label>
+    <input type="text" v-model="searchKey">
+  </label>
+  <br>
+  <ul>
+    <li v-for="(item,index) in searchList" :key="item.id">
+      {{item.id}}--姓名：{{item.name}}--年龄：{{item.age}}
+    </li>
+  </ul>
+</div>
+<script>
+  const vm = new Vue({
+    el: '#demo',
+    data: {
+      list: [
+        {id: 1, name: '张三', age: 18},
+        {id: 2, name: '李四', age: 20},
+        {id: 3, name: '王五', age: 22},
+      ],
+      searchKey: '',
+      // searchList: []
+    },
+    computed: {
+      searchList () {
+        return this.list.filter(item => {
+          return item.name.indexOf(this.searchKey) > -1
+        })
+      }
+    },
+    // watch: {
+    //   searchKey: {
+    //       immediate: true,
+    //         handler: function (val) {
+    //             this.searchList = this.list.filter(item => {
+    //                 return item.name.indexOf(val) > -1
+    //             })
+    //         }
+    //     }
+    // }
+  })
+</script>
+</body>
+</html>

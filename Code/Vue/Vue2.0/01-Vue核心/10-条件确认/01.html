@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<div id="demo">
+    <p v-show="isShow">{{msg}}</p>
+    <button v-on:click="show">显示</button>
+  <!--v-if可以和template配合使用，但不能和v-show配合-->
+    <p v-if="isShow">{{msg}}</p>
+    <p v-else-if="isShow">{{msg2}}</p>
+    <p v-else>{{msg3}}</p>
+</div>
+<script>
+  const vm = new Vue({
+    el: '#demo',
+    data: {
+      msg: 'Hello!',
+      msg2: 'Hello!2',
+      msg3: 'Hello!3',
+      isShow: false
+    },
+    methods: {
+      show() {
+        this.isShow = !this.isShow
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<div id="demo">
+  <form>
+    <table>
+      <tr><td><label for="account">账号</label></td><td><input id="account" type="text" v-model.trim="userInfo.account"></td></tr>
+      <tr><td><label for="password">密码</label></td><td><label><input id="password" type="password" v-model.trim="userInfo.password"></label></td></tr>
+      <tr><td>性别</td>
+        <td>
+          <label><input type="radio" name="sex" value="男" v-model="userInfo.sex">男</label>
+          <label><input type="radio" name="sex" value="女" v-model="userInfo.sex">女</label>
+        </td>
+      </tr>
+      <tr><td>爱好</td>
+        <td>
+          <label>吃饭<input type="checkbox" value="吃饭" v-model="userInfo.hobby"></label>
+          <label>睡觉<input type="checkbox" value="睡觉" v-model="userInfo.hobby"></label>
+          <label>打豆豆<input type="checkbox" value="打豆豆" v-model="userInfo.hobby"></label>
+        </td>
+      </tr>
+      <tr><td>地区</td>
+        <td>
+          <label><select v-model="userInfo.area">
+              <option value="">请选择地区</option>
+              <option value="成都">成都</option>
+              <option value="绵阳">绵阳</option>
+          </select></label>
+        </td>
+      </tr>
+      <tr><td>其他</td><td><label><textarea v-model.lazy="userInfo.other"></textarea></label></td></tr>
+      <tr><td colspan="2"><label><input type="checkbox" v-model="userInfo.agree">阅读并接受协议<a href="https://www.google.com" target="_blank">《用户协议》</a></label></td></tr>
+      <tr><td colspan="2"><label><input type="button" value="提交" @click="submit"></label></td></tr>
+    </table>
+  </form>
+</div>
+<script>
+  const vm = new Vue({
+    el: '#demo',
+    data: {
+      userInfo: {
+        account: '',
+        password: '',
+        sex: '男',
+        hobby: [],
+        area: '',
+        other: '',
+        agree: false,
+      }
+    },
+    methods: {
+      submit() {
+        if (this.userInfo.agree) {
+          console.log(this.userInfo)
+        }else {
+          alert('请同意用户协议')
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

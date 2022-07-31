@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="demo"></div>
+<script>
+  // 创建一个student组件
+  const student = {
+    template: `<div>
+      <h2>studentName:{{name}}</h2>
+      <h2>age:{{age}}</h2>
+      <button @click="showStudentName">show student name</button>
+    </div>`,
+    name: 'Student',
+    data(){
+      return {
+        name: '张三',
+        age: 18,
+      }
+    },
+    methods: {
+      showStudentName(){
+        alert(this.name)
+      }
+    }
+  }
+
+  // 创建一个school组件
+  const school = {
+    template: `<div>
+      <h2>schoolName:{{name}}</h2>
+      <h2>address:{{address}}</h2>
+      <button @click="showSchoolName">show school name</button>
+      <student></student>
+    </div>`,
+    name: 'School',
+    data(){
+      return {
+        name: '垮了，没有',
+        address: '成都',
+      }
+    },
+    methods: {
+      showSchoolName(){
+        alert(this.name)
+      }
+    },
+    components: {
+      student
+    }
+  }
+
+
+
+  new Vue({
+    template: `<school></school>`,
+    el:'#demo',
+    // 2.注册组件
+    components: {
+      school,
+    }
+  });
+</script>
+<script>
+  Vue.config.productionTip = false;
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../resource/js/vue.js"></script>
+</head>
+<body>
+<div id="demo">
+  <button @click="add">添加</button>
+  <ul>
+    <li v-for="(item,index) in list" :key="item.id">
+      {{index}}--{{item.id}}--姓名：{{item.name}}--年龄：{{item.age}}<input >
+    </li>
+  </ul>
+</div>
+<script>
+  const vm = new Vue({
+    el: '#demo',
+    data: {
+        list: [
+            {id: 1, name: '张三', age: 18},
+            {id: 2, name: '李四', age: 20},
+            {id: 3, name: '王五', age: 22},
+        ],
+    },
+    methods: {
+      add() {
+        this.list.unshift({
+          id: this.list.length + 1,
+          name: `新增${this.list.length + 1}`,
+          age: 18,
+        })
+      }
+    }
+  })
+</script>
+</body>
+</html>

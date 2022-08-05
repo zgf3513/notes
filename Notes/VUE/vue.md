@@ -1,4 +1,4 @@
-# Vue 2.0
+# Vue 2.x
 
 官方文档：https://cn.vuejs.org/
 
@@ -925,11 +925,742 @@ npm run serve			# 运行项目
 3. 使用v-model时要切记：v-model绑定的值不能是props传过来的值，因为props是不可以修改的
 4. props传过来的若是对象类型的值，修改对象中的属性时Vue不会报错，但不推荐这样做
 
+### 3.10、浏览器本地存储
+
+![image-20220801124829874](vue2.0.assets/image-20220801124829874.png)
+
+### 3.11、组件的自定义事件
+
+1. 一种组件间通信的方式：适用于： 子组件 ==> 父组件
+
+2. 使用场景
+
+3. 绑定自定义事件：
+
+   1. 第一种方式：在父组件中： `<Demo @xxx="test"/>` 或 `<Demo v-on:xxx="test"/>`
+
+   2. 第二种方式：在父组件中：
+
+      ```html
+      <demo ref='demo'>
+          ......
+      mounted(){
+          this.$ref.demo.$on('xxx',this.test)
+          }
+      ```
+
+      
+
+4. 触发自定义事件： `this.$emit('xxx',args)`
+
+5. 解绑自定义事件： `this.$off('xxx')`，多个用 `this.$off(['xxx','xxx',...])`，解绑全部用 `this.$off()`
+
+6. 组件山也可以绑原生DOM事件，不过要用 `.native` 修饰符
+
+7. 注意：同 `this.$ref.xxx.on('xxx', 回调)` 绑定自定义时间是，回调要么配置在methods中，要么使用箭头函数，否则this的指向有问题
+
+### 3.12、全局事件总线（GlobalEventBus）：任意组件通信
+
+1. 一种组件间通信的方式，适用于任意组件间通信
+
+2. 安装全局事件总线
+
+   ```js
+   new Vue({
+       render: h => h(App),
+       beforeCreate() {
+           Vue.prototype.$bus = this  // 安装全局事件总线
+       }
+   }).$mount('#app');
+   ```
+
+3. 使用事件总线
+
+   1. 接收数据：
+
+      ```vue
+      mounted() {
+        this.$bus.$on('xxx', (data) => {
+          
+        })
+      }
+      ```
+
+   2. 提供数据： `this.$bus.$emit('xxx',data)`
+
+4. 最好在 `beforeDestroy` 钩子中用 `$off()` 去解绑组件所用到的事件
+
+### 3.13、消息订阅与发布
+
+个人感觉没有全局事件总线好用
+
+1. 一种组件间通信的方式，适用于任意组件间通信
+
+2. 使用步骤：
+
+   1. 安装 `pubsub` ： `npm install pubsub-js`
+
+   2. 引入 `import pubsub from 'pubsub-js'`
+
+   3. 接收数据：
+
+      ```vue
+      methods: {
+          getMsg(msgTitle, data) {
+            ...
+          }
+        },
+        mounted() {
+          this.pid = pubsub.subscribe('msgTitle', this.getMsg)
+        },
+      ```
+
+   4. 提供数据：`pubsub.publish('msg', data`)
+
+   5. 最好在beforeDestroy钩子中使用 `pubsub.unsubscribe(pid)`去取消订阅
+
+### 3.14、nextTick
+
+1. 语法：`this.$nextTick(callback)`
+2. 作用：在下一次DOM更新结束后指向其指定的回调
+3. 什么时候用：改变玩数据后，要基于更新数据后的DOM进行某些操作时，要在nextTick所指定的回调函数中执行
+
+### 3.15、过渡动画
+
+不太想看，91-95级
+
 ## 4、Vue中的Ajax
+
+### 4.1、解决跨域问题，Vue脚手架配置代理
+
+方法一
+
+​	在 `vue.config.js` 中添加
+
+```
+devServer: {
+  proxy: 'http://localhost:81'
+}
+```
+
+说明：
+
+1. 优点：配置简单，请求资源时直接发给前端即可
+2. 缺点：不能配置多个代理，不能灵活控制请求是否走代理
+3. 工作方式：若按照上述方式配置代理，当请求了前端不存在的资源是，才会转发给服务器（优先匹配本地资源）
+
+方法二
+
+​	编写 `vue.config.js` 的具体代理规则
+
+```
+module.exports = {
+  devServer: {
+    proxy: {
+      '/api': {
+        target: '<url>',
+        ws: true, // 用于支持websockets
+        changeOrigin: true, // 用于控制请求头中的host值
+        pathRewrite: { // 重写路径
+            '^/api': ''
+        }
+      },
+      '/foo': {
+        target: '<other_url>'
+      }
+    }
+  }
+}
+```
+
+说明：
+
+1. 优点：可以配置多个代理，且可以灵活控制请求是否走代理
+2. 缺点：配置略微繁琐，请求资源时必须加前缀
+
+### 4.2、GitHub搜索案例
+
+见源码
+
+### 4.3、slot插槽
+
+vue3好像废弃了，需要再看吧
+
+#### 4.3.1、默认插槽
+
+#### 4.3.2、具名插槽
+
+#### 4.3.3、作用域插槽
+
+1. 理解：数据在组件自身，但根据数据生成结构需要组建的使用者来决定
+
+2. 代码：
+
+   这里不好看，看下源码就知道了
+
+   ```html
+   <template>
+     <div id="category">
+       <h3>{{title}}</h3>
+       <slot :games="games">
+         我是啥
+       </slot>
+     </div>
+   </template>
+   
+   <script>
+   
+   export default {
+     name: "Category",
+     data() {
+       return {
+           title: 'Games',
+           games: [
+             {id: 1, name: 'Counter Strike' },
+             {id: 2, name: 'Call of Duty' },
+             {id: 3, name: 'Mario' },
+           ]
+       };
+     },
+   }
+   </script>
+   ////////////////////////////////////////////////////////////////////////////////////////
+   <template>
+     <div id="app" class="container">
+       <category>
+         <template slot="game1">
+           <ul>
+             <li v-for="game in game1.games" :key="game.id">
+               {{game.name}}
+             </li>
+           </ul>
+         </template>
+       </category>
+       <category>
+         <template scope="game2">
+           <ol>
+           <li v-for="game in game2.games" :key="game.id">
+             {{game.name}}
+           </li>
+           </ol>
+         </template>
+       </category>
+       <category>
+         <template scope="game3">
+           <h3 v-for="game in game3.games" :key="game.id">
+             {{game.name}}
+           </h3>
+         </template>
+   
+       </category>
+     </div>
+   </template>
+   ```
 
 ## 5、Vuex
 
+### 5.1、理解Vuex
+
+#### 5.1.1、什么是Vuex
+
+1. 概念：专门在Vue中实现集中式状态（数据）管理的一个Vue插件，对Vue应用中多个组件的共享状态进行集中的管理（读/写），也是一种组件间通信的方式，且适用于任意组件间通信
+2. GitHub地址：https://github.com/vuejs/vuex
+
+### 5.2、什么时候使用Vuex
+
+1. 多个组件依赖同一状态
+2. 来自不同的组件需要变更同一状态
+
+### 5.3、工作原理
+
+![vuex](vue2.0.assets/vuex.png)
+
+### 5.4、搭建Vuex环境
+
+1. 创建文件 `src/store/index.js`
+
+   ```js
+   import Vue from "vue";
+   import Vuex from "vuex";
+   Vue.use(Vuex)
+   
+   
+   const actions= {
+       // 用于响应组件中的动作
+   }
+   
+   const mutations= {
+       // 操作数据
+   }
+   
+   const state= {
+       // 存储数据
+   }
+   
+   
+   // 创建并暴露store
+   export default new Vuex.Store({
+       actions: actions,
+       mutations: mutations,
+       state: state,
+   })
+   ```
+
+2. 在 `main.js` 中创建vm时传入 `store` 配置项
+
+   ```js
+   import Vue from 'vue'
+   import App from './App.vue'
+   import store from './store'
+   
+   Vue.config.productionTip = false
+   
+   new Vue({
+     render: h => h(App),
+     store: store,
+   }).$mount('#app')
+   ```
+
+### 5.5、基本使用
+
+1. 读取数据： `[this.]$store.state.dataname`
+
+2. 组件修改Vuex中的数据： `$store.dispatch('action',data)` 或 `$store.commit('mutation',data)`
+
+   如果没有网络请求，可以直接commit，不用dispatch
+
+### 5.6、getters的使用
+
+1. 概念
+
+2. 在 `store.js` 中追加 `getters` 配置
+
+   ```js
+   ....
+   const getters = {
+       // 用于响应组件中的计算属性
+      ....
+   }
+   ....
+   // 创建并暴露store
+   export default new Vuex.Store({
+       ....
+       getters: getters,
+   })
+   ```
+
+3. 组件中读取数据 `$store.getters.xxx`
+
+### 5.7、四个map方法的使用
+
+有时间再转文本吧，累，115-116集
+
+![image-20220803205456308](vue2.0.assets/image-20220803205456308.png)
+
+![image-20220803211847170](vue2.0.assets/image-20220803211847170.png)
+
+```js
+<template>
+  <div id="count">
+    <h2>当前和为：{{sum}}，bigSum ：{{getSum}}</h2>
+    <select v-model="range">
+      <option v-for="item in 100" :value="item" :key="item">{{item}}</option>
+    </select>
+    <button @click="add(range)">+</button>
+    <button @click="reduce(range)">-</button>
+    <button @click="addWhileOdd(range)">当基数再加</button>
+    <button @click="addWait(range)">等等再加</button>
+  </div>
+</template>
+
+<script>
+import { mapState,mapGetters,mapActions,mapMutations } from 'vuex'
+export default {
+  name: "Count",
+  data(){
+    return {
+      range: 1
+    }
+  },
+  computed: {
+    ...mapState(['sum']),
+    ...mapGetters(['getSum'])
+  },
+  methods: {
+    ...mapActions({
+      add: 'AddAction',reduce: 'ReduceAction',addWhileOdd: 'AddWhileOddAction',addWait: 'addWaitAction'
+    }),
+    // add() {
+    //   this.$store.dispatch("AddAction", this.range);
+    // },
+    // reduce() {
+    //   this.$store.dispatch("ReduceAction", this.range);
+    // },
+    // addWhileOdd() {
+    //   this.$store.dispatch("AddWhileOddAction", this.range);
+    // },
+    // addWait() {
+    //   this.$store.dispatch("AddWaitAction", this.range);
+    // }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
+```
+
+### 5.8、模块化+命名空间
+
+![image-20220804185632392](vue2.0.assets/image-20220804185632392.png)
+
+![image-20220804185658841](vue2.0.assets/image-20220804185658841.png)
+
+
+
 ## 6、Vue-router
 
+### 6.1、相关理解
+
+#### 6.1.1、Vue-router的理解
+
+Vue的一个插件，专门来实现 **SPA应用**
+
+#### 6.1.2、对SPA应用的理解
+
+1. 单页面Web应用（`single page web application`）
+2. 整个应用只有一个完整的页面
+3. 点击页面中的导航栏链接不会刷新页面，只会做页面的局部更新
+4. 数据需要通过ajax请求获取
+
+#### 6.1.3、路由的理解
+
+1. 什么是路由
+   1. 一个路由就是一组映射关系 key-value
+   2. ke为路径，value为function或component
+2. 路由分类
+   1. 后端路由
+      1. 理解：value是function，用于处理客户提交的请求
+      2. 工作过程：访问器收到一个请求时，根据请求路径找到匹配的函数来处理请求，返回相应数据 
+   2. 后端路由
+      1. 理解：value是component，用于展示页面的内容
+      2. 工作过程：当浏览器的路径改变时，对应的组件就会显示
+
+### 6.2、基本路由
+
+#### 6.2.1、基本使用
+
+1. 装vue-router `npm i vue-router`
+
+2. 编写路由配置
+
+   ```js
+   import Vue from "vue";
+   import router from 'vue-router'
+   import About from "@/components/About";
+   import Home from "@/components/Home";
+   Vue.use(router)
+   
+   export default new router({
+       routes: [
+           {
+               path: '/about',
+               component: About
+           },
+           {
+               path: '/home',
+               component: Home
+           }
+       ]
+   })
+   ```
+
+3. 实现路由切换 
+
+   ```html
+     <div id="app">
+       <div class="list-group" style="width: 280px;">
+             <router-link class="list-group-item list-group-item-action" active-class="active" to="/home">Home</router-link>
+             <router-link class="list-group-item list-group-item-action" active-class="active" to="/about">About</router-link>
+       </div>
+       <div>
+         <!-- 指定展示位置 -->
+         <router-view></router-view>
+       </div>
+   
+     </div>
+   ```
+
+#### 6.2.2、几个注意点
+
+1. 路由组件通常存放在`peges`文件夹，一般组件通常存放在`components`文件夹
+2. 通过切换，“隐藏”了的路由组件，默认是被销毁的，需要的时候再去挂载
+3. 每个组件都有自己的`$route`属性，里面存放着自己的路由信息
+4. 整个应用只有一个`router`，都可以通过组件的`$router`属性获取
+
+### 6.3、嵌套（多级）路由
+
+1. 配置：children配置项
+
+   ```js
+   import Vue from "vue";
+   import router from 'vue-router'
+   import About from "@/views/About";
+   import Home from "@/views/Home/Home";
+   import HomeMessage from "@/views/Home/HomeMessage";
+   import HomeNews from "@/views/Home/HomeNews";
+   Vue.use(router)
+   
+   export default new router({
+       routes: [
+           {
+               path: '/about',
+               component: About,
+               meta: {
+                   title: '关于'
+               },
+           },
+           {
+               path: '/home',
+               component: Home,
+               children: [
+                   {
+                       path: 'message',
+                       component: HomeMessage
+                   },
+                   {
+                       path: 'news',
+                       component: HomeNews
+                   }
+               ]
+           }
+       ]
+   })
+   ```
+
+2. 跳转
+
+   ```html
+   <router-link class="nav-link" active-class="active" to="/home/message">Message</router-link>
+   <router-link class="nav-link" active-class="active" to="/home/news">News</router-link>
+   ```
+
+### 6.4、路由器的query参数
+
+   1. 传参
+
+      ```html
+      <template>
+        <div>
+          <ul>
+            <li v-for="item in list" :key="item.id">
+      <!--        query参数-->
+      <!--        <router-link :to="`${item.path}?title=${item.title}`">{{item.name}}</router-link>-->
+              <router-link :to="{
+                path: item.path,
+                query: {
+                  title: item.title
+                }
+              }">{{item.title}}
+              </router-link>
+            </li>
+          </ul>
+          <router-view></router-view>
+        </div>
+      
+      </template>
+      ```
+
+   2. 接收
+
+      ```html
+      <h3>{{$route.query.title}}</h3>
+      ```
+
+### 6.4、命名路由
+
+   使用
+
+   ![image-20220804213756037](vue2.0.assets/image-20220804213756037.png)
+
+   ![image-20220804213815815](vue2.0.assets/image-20220804213815815.png)
+
+### 6.5、路由的parms参数
+
+   ```js
+   {
+                       name: 'homeMessage',
+                       path: 'message',
+                       component: HomeMessage,
+                       children: [
+                           {
+                               name: 'messageDetail',
+                               path: ':id/:title',
+                               component: messageDetail,
+                           }
+                       ]
+                   },
+   ```
+
+   ```html
+   <template>
+     <div>
+       <ul>
+         <li v-for="item in list" :key="item.id">
+           <router-link :to="{
+             name: 'messageDetail', /*这里不允许使用path，只能用name*/
+             params: {
+               id: item.id,
+               title: item.title
+             }
+           }">{{item.title}}</router-link>
+         </li>
+       </ul>
+       <router-view></router-view>
+     </div>
+   
+   </template>
+   ```
+
+   接收参数
+
+   ```html
+   <h3>{{$route.params.title}}</h3>
+   ```
+
+### 6.6、路由的props配置
+
+```js
+{
+    name: 'homeMessage',
+    path: 'message',
+    component: HomeMessage,
+    children: [
+        {
+            name: 'messageDetail',
+            path: ':id',
+            component: messageDetail,
+            // props: {a:1,b:2} // 一般不这样写，穿的死数据
+            // props: true, // 使用true，会将所有的params参数以props传递给组件
+            // props(route) {
+            //     return {
+            //         title: route.params.title
+            //     }
+            // }
+            props({params:{title}}) { // 和上面二选一
+                return {
+                    title: title
+                }
+            }
+        }
+    ]
+},
+```
+
+### 6.7、`<router-link>`的replace属性
+
+一个常识，了解即可
+
+1. 作用：控制路由跳转时操作浏览器历史记录的模式
+2. 浏览器的历史记录有两种写入模式：`push` 和 `replace`，`push`是追加历史记录，`replace`是替换历史记录，路由跳转时候默认为 `push`
+3. 如何开启 `replace` 模式： `<router-link replace ...></router-link>`
+
+### 6.8、编程式路由导航
+
+1. 作用：让不借助`<router-link>` 实现路由的跳转，让路由跳转更加灵活
+2. 很简单，具体见代码
+
+### 6.9、缓存路由组件
+
+1. 作用：让不展示的路由组件保持挂载，不销毁
+
+2. 具体编码
+
+   ```html
+   <keep-alive :include="['HomeNews']">
+     <router-view></router-view>
+   </keep-alive>
+   ```
+
+### 6.10、两个新的生命周期钩子
+
+1. 作用：路由组件所独有的生命周期钩子，用于捕获路由组件的激活状态
+
+2. 代码
+
+   ```js
+   deactivated() { // 组件被激活
+     console.log("news deactivated");
+     clearInterval(this.timer);
+   },
+   beforeDestroy() { // 组件失去激活
+     console.log("HomeNews beforeDestroy")
+     clearInterval(this.timer)
+   }
+   ```
+
+### 6.11、路由守卫
+
+```js
+// 全局前置路由守卫 每次路由切换和初始化的时候调用
+router.beforeEach((to, from, next) => {
+    console.log('全局前置路由守卫')
+    console.log(`from: ${from.path}, to: ${to.path}`)
+    next()
+})
+
+// 全局后置路由守卫 每次路由切换和初始化的时候调用
+router.afterEach((to, from) => {
+    console.log('全局后置路由守卫')
+    console.log(`from: ${from.path}, to: ${to.path}`)
+})
+```
+
+![image-20220805014329513](vue2.0.assets/image-20220805014329513.png)
+
+独享路由守卫没有后置，只有前置
+
+组件内路由守卫
+
+```js
+beforeRouteEnter (to, from, next) {
+  console.log('About beforeRouteEnter')
+  next()
+},
+beforeRouteLeave (to, from, next) {
+  console.log('About beforeRouteLeave')
+  next()
+},
+```
+
+![image-20220805020007481](vue2.0.assets/image-20220805020007481.png)
+
+### 6.12、路由的两种工作模式：hash，history
+
+对于一个url来说， # 及其后面的内容就是hash值
+
+hash值不会包含在HTTP请求内，即不会带给服务器
+
+**hash：**
+
+* 兼容性好，但是不美观
+* 若是以后将地址通过第三方手机app分享，若app校验降额，则地址会被标记为不合法
+
+**history：**
+
+* 兼容性略差，但地址干净，美观
+* 兼容性和hash模式相比略差
+* 应用上线时需要后端人员支持，解决刷新404的问题
+
 ## 7、Vue UI组件内容
+
+### 7.1、常用UI组件库
+
+* 移动端：[Vant](https://youzan.github.io/vant)、[Cube UI](https://didi.github.io/cube-ui)、[Miti UI](https://mint-ui.github.io)、[Nut UI](https://nutui.jd.com/#/)
+* PC端：[Element UI](https://element.eleme.io/#/zh-CN)、[IView UI](https://www.iviewui.com)
+
+# 2、Vue 3.x
+
+
 

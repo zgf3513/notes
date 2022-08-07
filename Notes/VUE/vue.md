@@ -39,7 +39,7 @@
 
 #### 1.2.1、效果和代码
 
-![image-20220722012855611](vue2.0.assets/image-20220722012855611.png)
+![image-20220722012855611](vue.assets/image-20220722012855611.png)
 
 ```html
 <!--准备好一个容器-->
@@ -86,7 +86,7 @@
 
 #### 1.3.1、效果和代码
 
-![image-20220722014455644](vue2.0.assets/image-20220722014455644.png)
+![image-20220722014455644](vue.assets/image-20220722014455644.png)
 
 ```html
 <!--准备好一个容器-->
@@ -189,7 +189,7 @@ data中所有的属性，最后都出现在了vm身上
 
 vm身上所有的属性及vue模型上的所有属性，在vue模板中都可以直接使用
 
-![image-20220722103440038](vue2.0.assets/image-20220722103440038.png)
+![image-20220722103440038](vue.assets/image-20220722103440038.png)
 
 ### 1.6、数据代理
 
@@ -253,7 +253,7 @@ Object.defineproperty
 
 #### 1.6.2、示例图
 
-![image-20220722120604210](vue2.0.assets/image-20220722120507942.png)
+![image-20220722120604210](vue.assets/image-20220722120507942.png)
 
 #### 1.6.3、总结
 
@@ -400,9 +400,9 @@ Object.defineproperty
 
 #### 1.11.2、key
 
-![image-20220729234654202](vue2.0.assets/image-20220729234654202.png)
+![image-20220729234654202](vue.assets/image-20220729234654202.png)
 
-![image-20220729235940091](vue2.0.assets/image-20220729235940091.png)
+![image-20220729235940091](vue.assets/image-20220729235940091.png)
 
 #### 1.11.3、总结
 
@@ -673,11 +673,11 @@ destroyed(){
 
 
 
-![image-20220730214653344](vue2.0.assets/image-20220730214653344.png)
+![image-20220730214653344](vue.assets/image-20220730214653344.png)
 
-![image-20220730215300936](vue2.0.assets/image-20220730215300936.png)
+![image-20220730215300936](vue.assets/image-20220730215300936.png)
 
-![image-20220730215445236](vue2.0.assets/image-20220730215445236.png)
+![image-20220730215445236](vue.assets/image-20220730215445236.png)
 
 ### 2.1、模块与组件、模块化与组件化
 
@@ -779,7 +779,7 @@ destroyed(){
 
 一个重要的内置关系：`VueComponent.prototype.__proto__ === Vue.prototype`
 
-![image-20220731002017790](vue2.0.assets/image-20220731002017790.png)
+![image-20220731002017790](vue.assets/image-20220731002017790.png)
 
 为什么要有这个关系：让组件实例可以访问到Vue原型上的属性，方法
 
@@ -812,9 +812,9 @@ npm run serve			# 运行项目
 
 无法执行运行 `set-ExecutionPolicy RemoteSigned`
 
-![image-20220731023458233](vue2.0.assets/image-20220731023458233.png)
+![image-20220731023458233](vue.assets/image-20220731023458233.png)
 
-![image-20220731023520413](vue2.0.assets/image-20220731023520413.png)
+![image-20220731023520413](vue.assets/image-20220731023520413.png)
 
 ### 3.4、关于不同版本的Vue
 
@@ -927,7 +927,7 @@ npm run serve			# 运行项目
 
 ### 3.10、浏览器本地存储
 
-![image-20220801124829874](vue2.0.assets/image-20220801124829874.png)
+![image-20220801124829874](vue.assets/image-20220801124829874.png)
 
 ### 3.11、组件的自定义事件
 
@@ -1173,7 +1173,7 @@ vue3好像废弃了，需要再看吧
 
 ### 5.3、工作原理
 
-![vuex](vue2.0.assets/vuex.png)
+![vuex](vue.assets/vuex.png)
 
 ### 5.4、搭建Vuex环境
 
@@ -1255,9 +1255,9 @@ vue3好像废弃了，需要再看吧
 
 有时间再转文本吧，累，115-116集
 
-![image-20220803205456308](vue2.0.assets/image-20220803205456308.png)
+![image-20220803205456308](vue.assets/image-20220803205456308.png)
 
-![image-20220803211847170](vue2.0.assets/image-20220803211847170.png)
+![image-20220803211847170](vue.assets/image-20220803211847170.png)
 
 ```js
 <template>
@@ -1313,9 +1313,9 @@ export default {
 
 ### 5.8、模块化+命名空间
 
-![image-20220804185632392](vue2.0.assets/image-20220804185632392.png)
+![image-20220804185632392](vue.assets/image-20220804185632392.png)
 
-![image-20220804185658841](vue2.0.assets/image-20220804185658841.png)
+![image-20220804185658841](vue.assets/image-20220804185658841.png)
 
 
 
@@ -1482,9 +1482,9 @@ Vue的一个插件，专门来实现 **SPA应用**
 
    使用
 
-   ![image-20220804213756037](vue2.0.assets/image-20220804213756037.png)
+   ![image-20220804213756037](vue.assets/image-20220804213756037.png)
 
-   ![image-20220804213815815](vue2.0.assets/image-20220804213815815.png)
+   ![image-20220804213815815](vue.assets/image-20220804213815815.png)
 
 ### 6.5、路由的parms参数
 
@@ -1617,7 +1617,7 @@ router.afterEach((to, from) => {
 })
 ```
 
-![image-20220805014329513](vue2.0.assets/image-20220805014329513.png)
+![image-20220805014329513](vue.assets/image-20220805014329513.png)
 
 独享路由守卫没有后置，只有前置
 
@@ -1634,7 +1634,7 @@ beforeRouteLeave (to, from, next) {
 },
 ```
 
-![image-20220805020007481](vue2.0.assets/image-20220805020007481.png)
+![image-20220805020007481](vue.assets/image-20220805020007481.png)
 
 ### 6.12、路由的两种工作模式：hash，history
 
@@ -1660,7 +1660,318 @@ hash值不会包含在HTTP请求内，即不会带给服务器
 * 移动端：[Vant](https://youzan.github.io/vant)、[Cube UI](https://didi.github.io/cube-ui)、[Miti UI](https://mint-ui.github.io)、[Nut UI](https://nutui.jd.com/#/)
 * PC端：[Element UI](https://element.eleme.io/#/zh-CN)、[IView UI](https://www.iviewui.com)
 
-# 2、Vue 3.x
+# Vue 3.x
 
+## Vue3简介
 
+![image-20220805031557432](vue.assets/image-20220805031557432.png)
 
+![image-20220805031930138](vue.assets/image-20220805031930138.png![image-20220805032121796](vue.assets/image-20220805032121796.png)
+
+## 1、创建Vue3.x工程
+
+1. 使用vue-cli创建
+
+   与之前一样，就不多赘述了，版本再4.5.0上就行
+
+2. 使用vite创建
+
+   ![image-20220805111339863](vue.assets/image-20220805111339863.png)
+
+   ![image-20220805111416228](vue.assets/image-20220805111416228.png)
+
+![image-20220805111401200](vue.assets/image-20220805111401200.png)
+
+```sh
+npm init vite-app <project-name>
+cd <project-name>
+npm install
+npm run dev
+```
+
+## 2、常用的Composition API
+
+### 2.1、setup
+
+1. 理解：Vue3.0中一个新的配置项，值为一个函数
+2. setup是所有composition API “表演的舞台”
+3. 组件中所用到的：数据、方法等等，均要配置在setup中
+4. setup函数的两种返回值
+   1. 若返回一个对象，则对象中的属性、方法，在模板中均可直接使用
+   2. 若返回一个渲染函数，则可以自定义渲染内容
+5. 注意点：
+   1. 尽量不要与Vue2.x配置混用
+      * Vue2.x配置（data、methods、computed）中可以访问到setup中的属性、方法
+      * 但setup中不能访问到Vue2.x的配置（data、methods、computed）
+      * 如果有重名，setup优先
+   2. setup不能是一个async函数（现在好像可以了？没试过），因为返回值不再是return的对象，而是promise，模板看不到return对象中的属性，后期可以，需要Suspense和异步组件的配合
+
+### 2.2、ref函数
+
+* 作用：定义一个响应式的数据
+* 语法： `const xx = ref(initValue)`
+  * 创建一个半酣响应式数据的引用对象（reference对象）
+  * JS中操作：`xxx.value`
+  * 模板中读取数据：不需要`.value`，直接读取就行
+* 备注：
+  * 接收的数据可以时：基本类型，也可以是对象
+  * 基本类型的数据：响应式依然是靠 `Object.defineProperty()` 的 `get` 与 `set` 完成的
+  * 对象类型的数据：内部楸树了vue3.0中的一个新函数：`reactive`函数
+
+### 2.3、reactive函数
+
+* 作用：定义一个对象类型的响应式数据（基本类型不要用，要用ref函数）
+* 语法：`const 代理对象 = reactive(源对象)`接收一个对象或数组，返回一个代理对象（proxy对象）
+* reactive定义的响应式数据是深层次的。
+* 内部基于ES6的Proxy实现，通过代理对象操作的元对象内部数据进行操作
+
+### 2.4、Vue3.0中的响应式原理
+
+**vue2.x的响应式**
+
+* 实现原理
+  * 对象类型：通过 `Object.defineProperty()` 对属性的读取、修改进行拦截（数据劫持）
+  * 数组类型：通过重写更新数组的一系列方法来拦截（对数组的变更方法进行了包装）
+* 存在问题
+  * 新增属性、删除属性 界面不会更新
+  * 直接通过下标修改数组，界面不会自动更新
+
+**vue3.0的响应式**
+
+* 实现原理：
+  * 通过proxy（代理）：拦截对象中的任意属性的变化，包括属性值的读写，属性的添加，属性的删除
+  * 通过Reflect（反射）：对被代理对象的属性进行操作
+  * MDN文档中面熟Proxy与Reflect：
+    * Proxy：自己搜下吧。。。。懒得找了
+    * Reflect：自己搜下吧。。。。懒得找了
+      ![image-20220805171819986](vue.assets/image-20220805171819986.png)
+
+### 2.5、reactive对比ref
+
+* 从定义数据角度对比
+  * ref用来定义基本数据类型
+  * reactive用来定义对象/数组类型
+  * 备注：ref也可以用来定义对象/数组，他内部会自动通过reactive转为代理对象
+* 从原理角度对比
+  * ref通过  `Object.defineProperty()` 的 `get` `set`来实现响应式（数据劫持）
+  * reactive通过使用Proxy来实现响应式（数据劫持），并通过Reflect操作源对象内部的数据
+* 从使用角度对比
+  * ref定义的数据：操作数据需要 `.value`，模板中直接读取不需要
+  * reactive定义的数据：操作数据与读写不需要 `.value`
+
+### 2.6、setup的两个注意点
+
+* setup执行的时机
+  * 在beforeCreate之前执行，this是undefined
+* setup的参数
+  * props：值为对象，包含：组件外部传递过来，且组件内部声明接收了的属性
+  * context：上下文对象
+    * attrs：值为对象，半酣：组件外部传递过来，但没有在props配置中声明的属性，相当于 this.$attrs
+    * solts：收到的插槽内容，相当于 this.$slots
+    * emit：分发自定义事件的函数，相当于 this.$emit
+
+### 2.7、计算属性与监视
+
+老师我废了阿，晚点再看看阿
+
+1. computed函数
+
+   * 与Vue2.x中computed配置功能一致
+   * ![image-20220805175704303](vue.assets/image-20220805175704303.png)
+
+2. watch函数
+
+   * 与Vue2.x中watch配置功能一致
+
+   * 两个小坑：
+
+     * 监视reactive定义的响应式数据时：oldValue无法正确获取、强制开启了深度监视（deep）配置失效
+     * 监视reactive定义的响应式数据中的某个属性时，deep配置有效
+
+     ![image-20220805184241587](vue.assets/image-20220805184241587.png)
+     
+     ![image-20220805184303881](vue.assets/image-20220805184303881.png)
+
+3. watchEffect函数
+
+   watchEffect：用谁监视谁
+
+   ![image-20220805190102680](vue.assets/image-20220805190102680.png)
+
+### 2.8、生命周期
+
+![image-20220805193527095](vue.assets/image-20220805193527095.png)
+
+![image-20220805193703840](vue.assets/image-20220805193703840.png)
+
+如果一起写，CompostitionAPI的生命周期钩子优先级比配置项的高，但没十年脑血栓写不出来同时存在两种
+
+### 2.9、自定义hook函数
+
+* 什么是hook？本质是一个函数，把setup中使用的CompostionAPI进行了封装
+* 类似于Vue2.x中的mixin（混合；混入）
+* 自定义hook的优势：复用代码，让setup中的逻辑更清晰易懂
+
+### 2.10、toRefs
+
+* 作用：创建一个ref对象，其value值指向另一个对象中的某个属性
+* 语法：`const name = toRef(persion,'name')`
+* 应用：要将响应式对象中的某个属性单独提供给外部使用时
+* 拓展：`toRefs`与 `toRef` 功能一致，但可以批量创建多个ref对象，语法： `toRefs(persion)`
+
+## 3、其他Composition API
+
+### 3.1、shallowReactive与shallowRef
+
+* shallowReactive：只处理对象最外层的属性的响应式（浅响应式）
+* shallowRef：只处理基本数据类型的响应式，不进行对象的响应式处理
+* 什么时候用
+  * 如果有一个对象数据，结构比较深，但变化时只是外层属性变化 ===> shallowReactive
+  * 如果有一个对象数据，后续功能不会修改对象中的属性，二十生成新的对象来替换 ===> shallowRef
+
+### 3.2、readonly与shallowReadonly
+
+* readonly：让一个响应式数据为只读的（深只读）
+* shallowReadonly：让一个响应式数据变为只读的（浅只读）
+* 应用场景：不希望数据被修改时
+
+### 3.3、toRow与markRaw
+
+* toRow
+  * 作用：将一个由 `reactive` 生成的响应式对象转换为普通对象
+  * 使用场景：用于读取响应式对象对应的普通对象，这个普通对象的所有操作，不会引起页面更新
+* markRaw
+  * 作用：标记一个对象，使其永远不会成为响应式对象
+  * 应用场景：
+    1. 有些值不应该设置为响应式的，例如复杂的第三方类库
+    2. 当渲染具有不可变数据源的大列表时，跳过响应式可以提高性能
+
+### 3.4、customRef
+
+* 作用：创建一个自定义的ref，并对其依赖跟踪和更新触发进行显示控制
+
+* 实现防抖效果：
+
+  ```html
+    <input v-model="text" />
+    <h3>{{text}}</h3>
+  ```
+
+  ```js
+  function useDebouncedRef(value, delay = 200) {
+    let timeout
+    return customRef((track, trigger) => {
+      return {
+        get() {
+          track()	// 通知Vue追踪数据的变化（提前和get商量，让他认为这个数据是有用的）
+          return value
+        },
+        set(newValue) {
+          clearTimeout(timeout)
+          timeout = setTimeout(() => {
+            value = newValue
+            trigger()	// 通知Vue重新去解析模板
+          }, delay)
+        }
+      }
+    })
+  }
+  
+  export default {
+    setup() {
+      return {
+        text: useDebouncedRef('hello')
+      }
+    }
+  }
+  ```
+
+### 3.5、provide与inject
+
+* 作用：实现祖孙组件间通信
+
+* 套路：父组件有一个 `provide` 选项来提供数据，后代组件有一个 `inject` 选项来使用这些数据
+
+* 具体写法
+
+  1. 祖组件中：
+
+     ![image-20220805230859188](vue.assets/image-20220805230859188.png)
+
+  2. 孙组件中：
+
+     ![image-20220805230919565](vue.assets/image-20220805230919565.png)
+
+### 3.6、响应式数据的判断
+
+* isRef：检查一个值是否为ref对象
+* isReactive：检查一个对象是否由 `reactive` 创建的响应式代理
+* isReadonly：检查一个对象是否由 `readonly` 创建的只读代理
+* isProxy：检查一个对象是否由 `reactive` 或者 `readonly` 方法创建的代理
+
+## 4、Composition API的优势
+
+### 4.1、Compostition API存在的问题
+
+使用传统的OptionsAPI中，新增或者修改一个需求，就需要分别在data，methods，computed中修改
+
+### 4.2、Compostition API的优势
+
+我们可以更加优雅的组织我们的代码，函数。让相关功能的代码更加有序的组织在一起
+
+## 5、新的组件
+
+### 5.1、Fragment
+
+* 在Vue2中，组件必须有一个根标签
+* 在Vue3中，组件可以没有根标签，内部会将多个标签包含在一个Fragment虚拟元素中
+* 好处：减少标签层级，减小内存占用
+
+### 5.2、Telepot
+
+* 什么是Teleport？
+
+  `Teleport`是一种能够将我们的组件HTML结构移动到指定位置的技术
+
+  ![image-20220805232556620](vue.assets/image-20220805232556620.png)
+
+### 5.3、Suspense
+
+* 等待异步组件时渲染一些后备内容，获得更好的用户体验
+* ![image-20220805235514376](vue.assets/image-20220805235514376.png)
+
+## 6、其他 
+
+### 6.1、全局API的转移
+
+![image-20220805235618517](vue.assets/image-20220805235618517.png)
+
+### 6.2、其他改变
+
+* data选项应该始终被声明为一个函数
+
+* 过度类名的改写
+
+  * Vue2.x的写法
+
+    ![image-20220806000003459](vue.assets/image-20220806000003459.png)
+
+  * Vue3.x的写法
+
+    ![image-20220805235951835](vue.assets/image-20220805235951835.png)
+
+  * 移除了keyCode作为v-on的修饰符，同时也不再支持 `config.keyCode`
+
+  * 移除 `v-on.native` 修饰符
+
+    * 父组件中绑定shi见
+
+      ![image-20220806000142030](vue.assets/image-20220806000142030.png)
+
+    * 子组件中声明自定义事件
+
+      ![image-20220806000434247](vue.assets/image-20220806000434247.png)
+
+  * 移除过滤器（filter）
+
+    过滤器虽然看起来很方便，但它需要一个自定义语法，打破大括号内表达式”只是JavaScript“的假设，这不仅有学习成本，而且有实现成本。建议用方法调用或计算属性去替换掉过滤器
